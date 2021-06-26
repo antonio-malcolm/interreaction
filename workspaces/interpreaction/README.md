@@ -68,14 +68,14 @@ Install interReaction (React) and / or add as a dependency:
   "react": "^17.0.2",
   "react-dom": "^17.0.2",
   "scheduler": "^0.20.2",
-  "interReaction": "^1.0.0",
+  "interReaction": "^1.0.2",
 
 }
 ```
 
 Or:
 ```shell
-$ npm install --save react@17.0.2 react-dom@17.0.2 scheduler@0.20.2 interReaction@1.0.0
+$ npm install --save react@17.0.2 react-dom@17.0.2 scheduler@0.20.2 interReaction@1.0.2
 ```
 
 __If using the Preact build (interPreaction):__  
@@ -84,14 +84,14 @@ Install interPreaction (React) and / or add as a dependency:
 "dependencies": {
 
   "preact": "^10.5.13",
-  "interPreaction": "^1.0.0",
+  "interPreaction": "^1.0.2",
 
 }
 ```
 
 Or:
 ```shell
-$ npm install --save preact@10.5.13 interPreaction@1.0.0
+$ npm install --save preact@10.5.13 interPreaction@1.0.2
 ```
 
 In your React application, initialize the interReaction instance, passing in component name to React component mappings, 
