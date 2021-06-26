@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+
+    <style type="text/css">
+			@keyframes fadeIn {
+			  0% { opacity: 0; }
+			  100% { opacity: 1; }
+			}
+
+      * {
+        box-sizing: border-box;
+      }
+
+		  h1, h2, h3, h4, p, ul {
+		    margin: 0 0 10px;
+		  }
+
+      p {
+        margin: 0 0 12px;
+      }
+
+      code {
+        font-family: monospace;
+        font-size: 1.1em;
+        font-weight: 600;
+      }
+
+      main {
+        margin: 16px auto;
+        font-family: Arial, sans-serif;
+        font-size: 1em;
+      }
+
+      main > header {
+		    padding: 16px 0 10px;
+		    background-color: #282c34;
+		    color: #ffffff;
+      }
+
+      main > header .build_icon {
+        display: none;
+        margin: -.25em 0 0;
+        vertical-align: middle;
+      }
+
+      main > header > div,
+      #description > div,
+      #interreaction_test {
+	      width: 75%;
+	      margin: 0 auto;
+      }
+
+      #description {
+		    padding: 16px 0 10px;
+		    margin: 0 0 16px;
+		    background-color: #d0d0d0;
+      }
+
+      #ready_state_text {
+        font-weight: 600;
+      }
+
+      #custom_tagname_name_default_msg,
+      #custom_tagname_status_set,
+      #custom_tagname_status_unset {
+        display: none;
+      }
+
+      #custom_tagname_name,
+      #custom_tagname_name_default_msg.display,
+      #custom_tagname_status_set.display,
+      #custom_tagname_status_unset.display {
+        display: inline;
+        font-weight: 600;
+      }
+
+      #custom_tagname_name_default_msg {
+        font-weight: normal;
+      }
+
+      main#preact > header {
+        border-bottom: 5px solid #673ab8;
+      }
+
+      main#preact > header .build_icon_preact {
+	      display:inline-block;
+      }
+
+      main#preact #description {
+        background-color: #bb9cf4;
+      }
+
+      main#react > header {
+        border-bottom: 5px solid #538ce9;
+      }
+
+      main#react > header .build_icon_react {
+        display:inline-block;
+      }
+
+      main#react #description {
+        background-color: #bbeffd;
+      }
+
+      #interreaction_test > section {
+        margin-bottom: 45px;
+      }
+
+      #interreaction_test > section > header {
+        margin-bottom: 12px;
+      }
+
+      #interreaction_test > section > header > div {
+        margin-bottom: 12px;
+      }
+
+      #interreaction_test > section > header > div:first-child {
+        border-bottom: 1px solid #d0d0d0;
+        padding-bottom: 4px;
+      }
+
+      #interreaction_test > section > header > div:first-child > h3 {
+        margin-bottom: 4px;
+      }
+
+      #interreaction_test > section > header aside {
+        font-style: italic;
+      }
+
+      #interreaction_test > section > header aside > .parenthesis {
+        font-style: normal;
+      }
+
+      .test_subjects,
+      .test_subjects > .single,
+      .test_subjects > .group,
+      .test_subjects > .list {
+        border-radius: 4px;
+      }
+
+      .test_subjects {
+        display: inline-flex;
+        align-items: stretch;
+        min-height: 346px;
+        padding: 10px;
+        background-color: #e6e6e6;
+      }
+
+      .test_subjects img,
+      .test_subjects p {
+        margin: 0 0 3px;
+      }
+
+      .test_subjects > div:not(:last-child) {
+        margin-right: 10px;
+      }
+
+      .test_subjects > div img {
+        max-width: 240px;
+        max-height: 199px;
+      }
+
+      .test_subjects > div inter-reaction,
+      .test_subjects > div custom-tagname-test {
+        max-width: 240px;
+      }
+
+      .test_subjects > div inter-reaction > *,
+      .test_subjects > div custom-tagname-test > * {
+        animation: fadeIn 0.1s;
+      }
+
+      .test_subjects .single.no-display,
+      .test_subjects .group.no-display,
+      .test_subjects .list.no-display {
+        display: none;
+      }
+
+      .test_subjects .single,
+      .test_subjects .group,
+      .test_subjects .list {
+        display: inline-block;
+        padding: 8px;
+      }
+
+      .test_subjects .single {
+        min-width: 256px;
+        background-color: #b1b1ff;
+      }
+
+      main#react .single {
+        background-color: #bbeffd;
+      }
+
+      main#preact .single {
+        background-color: #bb9cf4;
+      }
+
+      .test_subjects .group,
+      .test_subjects .list {
+        min-width: 506px;
+      }
+
+      .test_subjects > .group {
+        background-color: #e19869;
+      }
+
+      .test_subjects .list {
+        background-color: #6bc679;
+      }
+
+      .test_subjects h4.category {
+        margin-bottom: 6px;
+        text-align: center;
+      }
+
+      .test_subjects .single > div,
+      .test_subjects .group > div,
+      .test_subjects .list > div {
+        display: flex;
+        justify-content: center;
+      }
+
+      .test_subjects .group inter-reaction:not(:last-child),
+      .test_subjects .list inter-reaction:not(:last-child),
+      .test_subjects .group custom-tagname-test:not(:last-child),
+      .test_subjects .list custom-tagname-test:not(:last-child) {
+        margin-right: 10px;
+      }
+
+      .test_triggers > button {
+        margin: 0 0 12px;
+        font-weight: 800;
+      }
+
+      .test_triggers > button:hover {
+        cursor: pointer;
+      }
+
+      .test_triggers > button .trigger_text {
+        font-weight: 800;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main id="<%= htmlWebpackPlugin.options.mainClassName %>">
+      <header>
+        <div>
+	        <h1><%= htmlWebpackPlugin.options.projectName %> Render &amp; Actions Test Page</h1>
+	        <h3>
+	          Build: <%= htmlWebpackPlugin.options.buildName %>
+	          <svg xmlns="http://www.w3.org/2000/svg" class="build_icon build_icon_preact" width="26px" height="26px" viewBox="-256 -256 512 512">
+	            <title>Preact Logo</title>
+	            <path d="M0,-256 221.7025033688164,-128 221.7025033688164,128 0,256 -221.7025033688164,128 -221.7025033688164,-128z" fill="white"></path>
+	            <ellipse cx="0" cy="0" rx="75px" ry="196px" strokeWidth="16px" stroke-dasharray="373.548503517299 73.45149648270097" strokeDashoffset="885.7937254842823" fill="none" stroke="#673ab8" transform="rotate(52)">
+	            </ellipse>
+	            <ellipse cx="0" cy="0" rx="75px" ry="196px" strokeWidth="16px" stroke-dasharray="396.5925959364805 50.40740406351949" strokeDashoffset="-717.680310021795" fill="none" stroke="#673ab8" transform="rotate(-52)">
+	            </ellipse>
+	            <circle cx="0" cy="0" r="34" fill="#673ab8"></circle>
+	          </svg>
+	          <svg xmlns="http://www.w3.org/2000/svg" class="build_icon build_icon_react" width="26px" height="26px" viewBox="-11.5 -10.23174 23 20.46348">
+	            <title>React Logo</title>
+	            <circle cx="0" cy="0" r="2.05" fill="#61dafb"/>
+	            <g stroke="#61dafb" strokeWidth="1" fill="none">
+	              <ellipse rx="11" ry="4.2"/>
+	              <ellipse rx="11" ry="4.2" transform="rotate(60)"/>
+	              <ellipse rx="11" ry="4.2" transform="rotate(120)"/>
+	            </g>
+	          </svg>
+	        </h3>
+	        <h3>Environment: <%= htmlWebpackPlugin.options.environmentName %></h3>
+         </div>
+      </header>
+
+      <section id="description">
+        <div>
+	        <h3>
+		        The following methods test rendering and actions on <%= htmlWebpackPlugin.options.buildName %> components managed by interReaction.
+	        </h3>
+
+	        <p>This test is written in pure HTML5, JS and CSS3.</p>
+
+	        <p>
+	         As such, it is close, in environment, to real-world usage - these are <%= htmlWebpackPlugin.options.buildName %> 
+	         components, sourced from the structure of a <%= htmlWebpackPlugin.options.buildName %> application source tree, 
+	         being rendered and manipulated from within in a non-<%= htmlWebpackPlugin.options.buildName %> application.
+	        </p>
+        </div>
+      </section>
+
+      <section id="interreaction_test">
+        <p>window.interReactionReadyState is: <span id="ready_state_text">undefined</span></p>
+
+        <p>
+          Custom Element tagName config is:
+          <span id="custom_tagname_status_unset">unset</span>
+          <span id="custom_tagname_status_set">set</span>
+        </p>
+
+        <p>
+          Custom Element tagName is: 
+          <span id="custom_tagname_name"><%= htmlWebpackPlugin.options.customTagName %></span>
+          <span id="custom_tagname_name_default_msg"> (default)</span>
+        </p>
+
+        <section id="assigned_on_init">
+          <header>
+            <div>
+		          <h3>Assignment On Initialization</h3>
+		          <aside>
+		            <span class="parenthesis">(</span>
+		            <%= htmlWebpackPlugin.options.buildName %> Component Instances Assigned To Pre-populated / Statically-defined Custom Elements
+		            <span class="parenthesis">)</span>
+		          </aside>
+	          </div>
+          </header>
+
+          <p>
+            On initialization, interReaction will scan the DOM, for pre-populated / statically-defined interReaction Custom Elements, 
+            and automatically add a <%= htmlWebpackPlugin.options.buildName %> component instance, to each Custom Element node present, 
+            based on the comp-name and comp-id attributes defined. A comp-group attribute may also be defined, 
+            if the component should belong to a group.
+          </p>
+
+          <div class="test_subjects">
+	          <div class="single">
+	            <h4 class="category">
+	              Single Component
+	            </h4>
+
+	            <div>
+							  <!-- On init, interReaction will scan the page, for statically-defined Custom Elements... -->
+							  <!-- <inter-reaction comp-name="InterReactionComponentOne" comp-id="init-test-comp"></inter-reaction> -->
+							  <<%= htmlWebpackPlugin.options.customTagName %> comp-name="InterReactionComponentOne" comp-id="init-test-comp"></<%= htmlWebpackPlugin.options.customTagName %>>
+					    </div>
+			      </div>
+
+	          <div class="group empty">
+		          <h4 class="category">
+		             Grouped Components
+		          </h4>
+		          <div>
+		            <p>
+		              <span class="parenthesis">(</span>
+		              Not applicable to this method...
+		              <span class="parenthesis">)</span>
+		            </p>
+		          </div>
+	          </div>
+
+            <div class="list empty">
+              <h4 class="category">
+                Components Named In compList
+              </h4>
+              <div>
+                <p>
+                  <span class="parenthesis">(</span>
+                  Not applicable to this method...
+                  <span class="parenthesis">)</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="methods_create_and_assign">
+          <header>
+	          <div>
+		          <h3>Methods: <code>.createElement</code> and <code>.assign</code></h3>
+		          <aside>
+		            <span class="parenthesis">(</span>
+		            Create an interReaction Custom Element and Assign a <%= htmlWebpackPlugin.options.buildName %> component instance to an interReaction Custom Element
+		            <span class="parenthesis">)</span>
+		           </aside>
+		        </div>
+          </header>
+
+          <p>
+            The <code>.createElement</code> method creates and returns a new interReaction Custom Element. 
+            You may then add this element to the DOM, as you would any HTML element.
+          </p>
+
+          <p>
+            The <code>.assign</code> method assigns <%= htmlWebpackPlugin.options.buildName %> component instances to interReaction Custom Element nodes 
+            - usually, Custom Elements created using interReaction's <code>.createElement</code> method, 
+            then added to the DOM (such as with Element.appendChild, Element.insertBefore, etc.). 
+            Also, accepts a props object, the members of which, as the name implies, 
+            are passed as props, to the <%= htmlWebpackPlugin.options.buildName %> component instance.
+          </p>
+
+          <section class="interactive_test">
+            <div class="test_triggers">
+              <button id="trigger_create_and_assign">
+                <span class="trigger_text">Trigger Methods: </span>
+                <code>.createElement</code> and <code>.assign</code>
+              </button>
+            </div>
+
+            <div class="test_subjects">
+              <div class="single">
+	              <h4 class="category">
+	                Single Component
+	              </h4>
+	              <div></div>
+              </div>
+
+              <div class="list">
+                <h4 class="category">
+                  Components Named In compList
+                </h4>
+                <div></div>
+              </div>
+
+              <div class="group empty">
+                <h4 class="category">
+                   Grouped Components
+                </h4>
+                <div>
+                  <p>
+	                  <span class="parenthesis">(</span>
+	                  Not applicable to this method...
+	                  <span class="parenthesis">)</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <section id="method_createAssignToDomElement">
+          <header>
+            <div>
+              <h3>Method: <code>.createAssignToDomElement</code></h3>
+              <aside>
+                <span class="parenthesis">(</span>
+                Create an interReaction Custom Element, append it to the DOM, and assign its <%= htmlWebpackPlugin.options.buildName %> component instance, in one method
+                <span class="parenthesis">)</span>
+              </aside>
+            </div>
+          </header>
+
+          <p>
+            The <code>.createAssignToDomElement</code> method combines the functionality of methods <code>.createElement</code> and <code>.assign</code>. 
+            It creates and adds the interReaction Custom Element to the DOM, according to the DOM node provided. 
+            Additionally, it does so with positioning, relative to the DOM node's children, according to an additional arg of <code>'append'</code> 
+            (which adds it to the tail of the node), 'prepend' (which adds it to the head of the node), or <code>'replace'</code> 
+            (which replaces all children of the node). The default (no-arg) is <code>'append'</code>.
+          </p>
+
+          <p>
+            As with the <code>.assign</code> method, it can also take props, to be passed to the <%= htmlWebpackPlugin.options.buildName %> component instance.
+          </p>
+
+          <p>
+            It is a most convenient, most succinct means of adding one or more <%= htmlWebpackPlugin.options.buildName %> component instances, 
+            but lacks the flexibility of using the methods <code>.createElement</code> and <code>.assign</code> separately. 
+            That said, it is still very useful, and may even be your regular go-to method, for adding <%= htmlWebpackPlugin.options.buildName %> components.
+          </p>
+
+          <section class="interactive_test">
+            <div class="test_triggers">
+              <button id="trigger_createAssignToDomElement">
+                <span class="trigger_text">Trigger Method:</span> <code>.createAssignToDomElement</code>
+              </button>
+            </div>
+
+            <div class="test_subjects">
+              <div class="single">
+                <h4 class="category">
+                  Single Component
+                </h4>
+                <div></div>
+              </div>
+
+              <div class="list">
+                <h4 class="category">
+                  Components Named In compList
+                </h4>
+                <div></div>
+              </div>
+
+              <div class="group empty">
+                <h4 class="category">
+                   Grouped Components
+                </h4>
+                <div>
+                  <p>
+                    <span class="parenthesis">(</span>
+                    Not applicable to this method...
+                    <span class="parenthesis">)</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <section id="method_createAssignToDomSelector">
+          <header>
+	          <div>
+		          <h3>Method: <code>.createAssignToDomSelector</code></h3>
+		          <aside>
+		            <span class="parenthesis">(</span>
+		            Create an interReaction Custom Element, append it to the DOM, and assign its <%= htmlWebpackPlugin.options.buildName %> component instance, in one method
+		            <span class="parenthesis">)</span>
+		          </aside>
+		        </div>
+          </header>
+
+          <p>
+            The <code>.createAssignToDomSelector</code> method combines the functionality of methods <code>.createElement</code> and <code>.assign</code>. 
+            It creates and adds the interReaction Custom Element to the DOM, according to the query selector provided. 
+            Additionally, it does so with positioning, relative to the DOM target's children, according to an additional arg of <code>'append'</code> 
+            (which adds it to the tail of the target), <code>'prepend'</code> (which adds it to the head of the target), or <code>'replace'</code> 
+            (which replaces all children of the target). The default (no-arg) is <code>'append'</code>.
+          </p>
+
+          <p>
+            As with the <code>.assign</code> method, it can also take props, to be passed to the <%= htmlWebpackPlugin.options.buildName %> component instance.
+          </p>
+
+          <p>
+            It is a most convenient, most succinct means of adding one or more <%= htmlWebpackPlugin.options.buildName %> component instances, 
+            but lacks the flexibility of using the methods <code>.createElement</code> and <code>.assign</code> separately. 
+            That said, it is still very useful, and may even be your regular go-to method, for adding <%= htmlWebpackPlugin.options.buildName %> components.
+          </p>
+
+          <section class="interactive_test">
+            <div class="test_triggers">
+              <button id="trigger_createAssignToDomSelector">
+                <span class="trigger_text">Trigger Method:</span> <code>.createAssignToDomSelector</code>
+              </button>
+            </div>
+
+            <div class="test_subjects">
+              <div class="single">
+                <h4 class="category">
+                  Single Component
+                </h4>
+                <div></div>
+              </div>
+
+              <div class="list">
+                <h4 class="category">
+                  Components Named In compList
+                </h4>
+                <div></div>
+              </div>
+
+              <div class="group empty">
+                <h4 class="category">
+                   Grouped Components
+                </h4>
+                <div>
+                  <p>
+                    <span class="parenthesis">(</span>
+                    Not applicable to this method...
+                    <span class="parenthesis">)</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <section id="methods_mount_and_unmount">
+          <header>
+            <div>
+              <h3>Methods: <code>.mount</code> and <code>.unmount</code></h3>
+              <aside>
+                <span class="parenthesis">(</span>
+                Mount and unmount a <%= htmlWebpackPlugin.options.buildName %> component instance
+                <span class="parenthesis">)</span>
+              </aside>
+            </div>
+          </header>
+
+          <p>
+            The <code>.mount</code> method mounts a <%= htmlWebpackPlugin.options.buildName %> component instance. 
+            Normally, this would be used after using either method: .unmount, 
+            or method: .toggleMount (if the component was mounted, before toggle).
+          </p>
+
+          <p>
+            The <code>.unmount</code> method unmounts a <%= htmlWebpackPlugin.options.buildName %> component instance.
+          </p>
+
+          <section class="interactive_test">
+            <div class="test_triggers">
+              <button id="trigger_mount">
+                <span class="trigger_text">Trigger Method:</span> <code>.mount</code>
+              </button>
+
+              <button id="trigger_unmount">
+                <span class="trigger_text">Trigger Method:</span> <code>.unmount</code>
+              </button>
+            </div>
+
+            <div class="test_subjects">
+              <div class="single">
+                <h4 class="category">
+                  Single Component
+                </h4>
+                <div></div>
+              </div>
+ 
+              <div class="group">
+                <h4 class="category">
+                  Grouped Components
+                </h4>
+                <div></div>
+              </div>
+
+              <div class="list">
+                <h4 class="category">
+                  Components Named In compList
+                </h4>
+                <div></div>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <section id="method_remount">
+          <header>
+            <div>
+	            <h3>Method: <code>.remount</code></h3>
+	            <aside>
+		             <span class="parenthesis">(</span>
+		             Remount a <%= htmlWebpackPlugin.options.buildName %> component instance
+		             <span class="parenthesis">)</span>
+	             </aside>
+	          </div>
+          </header>
+
+          <p>
+            The <code>.remount</code> method unmounts then mounts a <%= htmlWebpackPlugin.options.buildName %> component instance.
+          </p>
+
+          <section class="interactive_test">
+            <div class="test_triggers">
+              <button id="trigger_remount">
+                <span class="trigger_text">Trigger Method:</span> <code>.remount</code>
+              </button>
+            </div>
+
+            <div class="test_subjects">
+              <div class="single">
+                <h4 class="category">
+                  Single Component
+                </h4>
+                <div></div>
+              </div>
+ 
+              <div class="group">
+                <h4 class="category">
+                   Grouped Components
+                </h4>
+                <div></div>
+              </div>
+
+              <div class="list">
+                <h4 class="category">
+                  Components Named In compList
+                </h4>
+                <div></div>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <section id="method_toggleMount">
+          <header>
+	          <div>
+		          <h3>Method: <code>.toggleMount</code></h3>
+		          <aside>
+		            <span class="parenthesis">(</span>
+		            Toggle mount (mount or unmount) a <%= htmlWebpackPlugin.options.buildName %> component instance
+		            <span class="parenthesis">)</span>
+		          </aside>
+		        </div>
+          </header>
+
+          <p>
+            The <code>.toggleMount</code> method mounts or unmounts a <%= htmlWebpackPlugin.options.buildName %> component instance, 
+            whichever is opposite to its current mount status.
+          </p>
+
+          <section class="interactive_test">
+            <div class="test_triggers">
+              <button id="trigger_toggleMount">
+                <span class="trigger_text">Trigger Method:</span> <code>.toggleMount</code>
+              </button>
+            </div>
+
+            <div class="test_subjects">
+              <div class="single">
+                <h4 class="category">
+                  Single Component
+                </h4>
+                <div></div>
+              </div>
+ 
+              <div class="group">
+                <h4 class="category">
+                  Grouped Components
+                </h4>
+                <div></div>
+              </div>
+
+              <div class="list">
+                <h4 class="category">
+                  Components Named In compList
+                </h4>
+                <div></div>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <section id="method_remove">
+	        <header>
+	          <div>
+	            <h3>Method: <code>.remove</code></h3>
+	            <aside>
+	              <span class="parenthesis">(</span>
+	              Remove a <%= htmlWebpackPlugin.options.buildName %> component instance
+	              <span class="parenthesis">)</span>
+	            </aside>
+	          </div>
+          </header>
+
+          <p>
+            The <code>.remove</code> method unmounts a <%= htmlWebpackPlugin.options.buildName %> component instance, then removes it, 
+            from interReaction's internal manager. Once removed, it is no longer available, 
+            for further actions. Additionally, a boolean flag may be passed, in order to also 
+            remove the interReaction Custom Element, from the DOM.
+          </p>
+
+          <section class="interactive_test">
+            <div class="test_triggers">
+              <button id="trigger_remove">
+                <span class="trigger_text">Trigger Method:</span> <code>.remove</code>
+              </button>
+            </div>
+
+            <div class="test_subjects">
+              <div class="single">
+                <h4 class="category">
+                  Single Component
+                </h4>
+                <div></div>
+              </div>
+ 
+              <div class="group">
+                <h4 class="category">
+                  Grouped Components
+                </h4>
+                <div></div>
+              </div>
+
+              <div class="list">
+                <h4 class="category">
+                  Components Named In compList
+                </h4>
+                <div></div>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <section id="method_replace">
+	        <header>
+		        <div>
+		          <h3>Method: <code>.replace</code></h3>
+		          <aside>
+		            <span class="parenthesis">(</span>
+		            Replace a <%= htmlWebpackPlugin.options.buildName %> component instance with a different instance
+		            <span class="parenthesis">)</span>
+		          </aside>
+		        </div>
+	        </header>
+
+          <p>
+            The <code>.replace</code> method replaces a <%= htmlWebpackPlugin.options.buildName %> component instance, 
+            with another component instance, specified by name.
+          </p>
+
+          <section class="interactive_test">
+            <div class="test_triggers">
+              <button id="trigger_replace">
+                <span class="trigger_text">Trigger Method:</span> <code>.replace</code>
+              </button>
+            </div>
+
+            <div class="test_subjects">
+              <div class="single">
+                <h4 class="category">
+                  Single Component
+                </h4>
+                <div></div>
+              </div>
+ 
+              <div class="group">
+                <h4 class="category">
+                  Grouped Components
+                </h4>
+                <div></div>
+              </div>
+
+              <div class="list">
+                <h4 class="category">
+                  Components Named In compList
+                </h4>
+                <div></div>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <section id="method_update">
+	        <header>
+		        <div>
+		          <h3>Method: <code>.update</code></h3>
+		          <aside>
+		            <span class="parenthesis">(</span>
+		            Update props to a <%= htmlWebpackPlugin.options.buildName %> component instance
+		            <span class="parenthesis">)</span>
+		          </aside>
+		        </div>
+	        </header>
+
+          <p>
+            The <code>.update</code> method passes props to a <%= htmlWebpackPlugin.options.buildName %> component instance.
+          </p>
+
+          <section class="interactive_test">
+            <div class="test_triggers">
+              <button id="trigger_update">
+                <span class="trigger_text">Trigger Method:</span> <code>.update</code>
+              </button>
+            </div>
+
+            <div class="test_subjects">
+              <div class="single">
+                <h4 class="category">
+                  Single Component
+                </h4>
+                <div></div>
+              </div>
+ 
+              <div class="group">
+                <h4 class="category">
+                  Grouped Components
+                </h4>
+                <div></div>
+              </div>
+
+              <div class="list">
+                <h4 class="category">
+                  Components Named In compList
+                </h4>
+                <div></div>
+              </div>
+            </div>
+          </section>
+        </section>
+      </section>
+    </main>
+
+    <script type="text/javascript">
+      if (typeof interReactionReadyState !== 'undefined') {    
+	      console.log(
+	        `Check the interReactionReadyState (on global / window - should be, at this point, undefined or "unloaded"): ${interReactionReadyState}`
+	      );
+      }
+
+      if (typeof interReactionReadyState !== 'undefined' && interReactionReadyState === 'ready') {
+        /**
+         * Inside this particular conditional, the following should NOT run,
+         * unless interReaction instantiation has happened impossibly fast...
+         */
+
+        console.log(
+          `Test the interReactionReadyState: ${interReactionReadyState}`
+        );    
+
+        document.querySelector('body').appendChild(
+          interReaction.createElement({
+            compName: 'COMP_NAME',
+            compId: 'COMP_ID'
+          })
+        );
+      } else {
+        document.addEventListener(
+          'interReactionInstanceReady',
+          function() {
+            console.log(
+              `Check the interReactionReadyState (on global / window - should be: 'ready'): ${interReactionReadyState}`
+            );
+
+            document.querySelector('#ready_state_text').innerText = window.interReactionReadyState;
+
+        	  const customTagNameNameLmnt = document.querySelector('#custom_tagname_name');
+
+        	  if (customTagNameNameLmnt !== null) {
+	        		if (String(customTagNameNameLmnt.innerHTML).trim() === 'custom-tagname-test') {
+	        			document.querySelector('#custom_tagname_status_unset').classList.remove('display');
+	        		  document.querySelector('#custom_tagname_status_set').classList.add('display');
+	        		  document.querySelector('#custom_tagname_name_default_msg').classList.remove('display');
+	        	  } else {
+	              document.querySelector('#custom_tagname_status_set').classList.remove('display');
+	              document.querySelector('#custom_tagname_status_unset').classList.add('display');
+                document.querySelector('#custom_tagname_name_default_msg').classList.add('display');
+	        	  }
+        	  }
+        	  
+        	  const sectionMethodCreateAssignToDomElement = document.querySelector('section#method_createAssignToDomElement');
+        	  const sectionMethodCreateAssignToDomSelector = document.querySelector('section#method_createAssignToDomSelector');
+        	  const sectionMethodRemount = document.querySelector('section#method_remount');
+            const sectionMethodRemove = document.querySelector('section#method_remove');
+            const sectionMethodReplace = document.querySelector('section#method_replace');
+        	  const sectionMethodToggleMount = document.querySelector('section#method_toggleMount');
+        	  const sectionMethodUpdate = document.querySelector('section#method_update');
+        	  
+            const sectionMethodsCreateAndAssign = document.querySelector('section#methods_create_and_assign');
+            const sectionMethodsMountAndUnmount = document.querySelector('section#methods_mount_and_unmount');
+
+            /**
+             * Throw all teh dataz structurez at all teh thingz!
+             * (Dynamic programmingz, pluz D.R.Yz., pluz all teh runtime performancez...)
+             */
+
+        	  const sectionMethodLmnts = {
+        			  sectionMethodCreateAssignToDomElement,
+	        			sectionMethodCreateAssignToDomSelector,
+	        			sectionMethodRemount,
+	              sectionMethodRemove,
+	              sectionMethodReplace,
+	        			sectionMethodToggleMount,
+	        			sectionMethodUpdate,
+	        			sectionMethodsCreateAndAssign,
+	        			sectionMethodsMountAndUnmount
+	        	  };
+
+        	  const lmntForEachIndicesToCompNames = Object.freeze({
+	        			0: 'InterReactionComponentOne',
+	        			1: 'InterReactionComponentToo',
+	        			2: 'InterReactionComponentThree',
+	        			3: 'InterReactionComponentFour',
+	        			4: 'InterReactionComponentFive'
+	        	  });
+
+        	  /**
+        	   * This tracking object is necessary when calling interReaction#replace,
+        	   * passing the compName (to include doing so passing compName and compId),
+        	   * as (should be expected) the compName changes when the component is replaced.
+        	   *
+        	   * Subsequent calls will need to pass the new compName, and this object facilitates such.
+        	   *
+        	   * (This is not needed, when passing compGroup, as compGroup is directly associated to the relevant portal keys.)
+        	   */
+        	  const prevReplacementCompNames = {
+	        		  single: undefined,
+	        		  compList: {}
+	        	  };
+
+        	  const lmntForEachIndicesToCompNamesLength = Object.keys(
+        			   lmntForEachIndicesToCompNames
+        			 ).length;
+
+        	  const lmntForEachIndicesToCompIdSubstrings = Object.freeze({
+	               0: 'comp_one',
+	               1: 'comp_too',
+	               2: 'comp_three',
+	               3: 'comp_four',
+	               4: 'comp_five'
+	             });
+
+            Object.keys(sectionMethodLmnts).forEach((sectionMethodLmntKey) => {
+            	if (sectionMethodLmntKey !== 'sectionMethodsCreateAndAssign') {
+            		if (sectionMethodLmntKey !== 'sectionMethodCreateAssignToDomElement') {
+			            if (sectionMethodLmntKey !== 'sectionMethodCreateAssignToDomSelector') {
+				            let compIdSuffix;
+				            let createAssignSingleSelector;
+				            let createAssignGroupedSelector;
+				            let createAssignToListedSelector;
+				            let interReactionMethod;
+				            let interReactionMethodTriggerSelector;
+				
+				            switch (sectionMethodLmntKey) {
+	                    case 'sectionMethodRemount':
+	                      compIdSuffix = 'test_remount';
+	                      createAssignSingleSelector = 'section#method_remount .test_subjects > .single > div';
+	                      createAssignGroupedSelector = 'section#method_remount .test_subjects > .group > div';
+	                      createAssignToListedSelector = 'section#method_remount .test_subjects > .list > div';
+	                      interReactionMethod = interReaction.remount;
+	                      interReactionMethodTriggerSelector = 'button#trigger_remount';
+	                      break;
+	
+	                    case 'sectionMethodRemove':
+	                      compIdSuffix = 'test_remove';
+	                      createAssignSingleSelector = 'section#method_remove .test_subjects > .single > div';
+	                      createAssignGroupedSelector = 'section#method_remove .test_subjects > .group > div';
+	                      createAssignToListedSelector = 'section#method_remove .test_subjects > .list > div';
+	                      interReactionMethod = interReaction.remove;
+	                      interReactionMethodTriggerSelector = 'button#trigger_remove';
+	                      break;
+	
+	                    case 'sectionMethodReplace':
+	                      compIdSuffix = 'test_replace';
+	                      createAssignSingleSelector = 'section#method_replace .test_subjects > .single > div';
+	                      createAssignGroupedSelector = 'section#method_replace .test_subjects > .group > div';
+	                      createAssignToListedSelector = 'section#method_replace .test_subjects > .list > div';
+	                      interReactionMethod = interReaction.replace;
+	                      interReactionMethodTriggerSelector = 'button#trigger_replace';
+	                      break;
+	
+	                    case 'sectionMethodToggleMount':
+	                      compIdSuffix = 'test_toggleMount';
+	                      createAssignSingleSelector = 'section#method_toggleMount .test_subjects > .single > div';
+	                      createAssignGroupedSelector = 'section#method_toggleMount .test_subjects > .group > div';
+	                      createAssignToListedSelector = 'section#method_toggleMount .test_subjects > .list > div';
+	                      interReactionMethod = interReaction.toggleMount;
+	                      interReactionMethodTriggerSelector = 'button#trigger_toggleMount';
+	                      break;
+	
+	                    case 'sectionMethodUpdate':
+	                      compIdSuffix = 'test_update';
+	                      createAssignSingleSelector = 'section#method_update .test_subjects > .single > div';
+	                      createAssignGroupedSelector = 'section#method_update .test_subjects > .group > div';
+	                      createAssignToListedSelector = 'section#method_update .test_subjects > .list > div';
+	                      interReactionMethod = interReaction.update;
+	                      interReactionMethodTriggerSelector = 'button#trigger_update';
+	                      break;
+	
+	                    case 'sectionMethodsMountAndUnmount':
+	                      compIdSuffix = 'test_mount_unmount';
+	                      createAssignSingleSelector = 'section#methods_mount_and_unmount .test_subjects > .single > div';
+	                      createAssignGroupedSelector = 'section#methods_mount_and_unmount .test_subjects > .group > div';
+	                      createAssignToListedSelector = 'section#methods_mount_and_unmount .test_subjects > .list > div';
+	                      break;
+				            }
+	
+				            /**
+				             * Setup (instantiation and assignment) for tested interReaction-managed components...
+				             */
+	
+				            interReaction.createAssignToDomSelector(
+				              {
+				                compName: lmntForEachIndicesToCompNames[0],
+				                compId: `${lmntForEachIndicesToCompIdSubstrings[0]}_${compIdSuffix}`,
+				                compProps: {
+				                  msg: 'I am a very handsome peng\'n!'
+				                }
+				              },
+				              createAssignSingleSelector,
+				              'append'
+				            );
+				
+				            const compListDetailsArg = { compList: [] };
+				
+				            let ct = 0;
+				            while (ct < 2) {
+				              interReaction.createAssignToDomSelector(
+				                {
+				                  compName: lmntForEachIndicesToCompNames[(ct + 1)],
+				                  compId: `${lmntForEachIndicesToCompIdSubstrings[(ct + 1)]}_${compIdSuffix}`,
+				                  compGroup: compIdSuffix,
+				                  compProps: {
+				                    msg: `Grouped peng'n`
+				                  }
+				                },
+				                createAssignGroupedSelector,
+				                'append'
+				              );
+				
+				              ct++;
+				            }
+				
+				            while (ct < 4) {
+				            	compListDetailsArg.compList.push({
+				                compName: lmntForEachIndicesToCompNames[(ct + 1)],
+				                compId: `${lmntForEachIndicesToCompIdSubstrings[(ct + 1)]}_${compIdSuffix}`,
+				                compProps: {
+				                  msg: `Listed peng'n`
+				                }
+				              });
+				
+				              ct++;
+				            }
+				
+				            interReaction.createAssignToDomSelector(
+				            	compListDetailsArg,
+				              createAssignToListedSelector,
+				              'append'
+				            );
+	
+				            /**
+				             * Setup test triggers and fulfillments...
+				             */
+	
+				            if (sectionMethodLmntKey === 'sectionMethodsMountAndUnmount') {
+			                let compListDetailsArg = { compList: [] };
+	
+	                     let ct = 2;
+	                     while (ct < 4) {
+			                  compListDetailsArg.compList.push({
+			                    compName: lmntForEachIndicesToCompNames[(ct + 1)],
+			                    compId: `${lmntForEachIndicesToCompIdSubstrings[(ct + 1)]}_${compIdSuffix}`
+			                  });
+	
+			                  ct++;
+			                }
+	                     
+					            sectionMethodsMountAndUnmount.querySelector('button#trigger_mount').addEventListener('click', function() {
+				                interReaction.mount({
+				                  compName: lmntForEachIndicesToCompNames[0],
+				                  compId: `${lmntForEachIndicesToCompIdSubstrings[0]}_${compIdSuffix}`
+				                });
+		
+				                interReaction.mount({ compGroup: compIdSuffix });
+		
+				                interReaction.mount(
+				                  compListDetailsArg
+				                );
+				              });
+		
+				              sectionMethodsMountAndUnmount.querySelector('button#trigger_unmount').addEventListener('click', function() {
+	                      interReaction.unmount({
+	                        compName: lmntForEachIndicesToCompNames[0],
+	                        compId: `${lmntForEachIndicesToCompIdSubstrings[0]}_${compIdSuffix}`
+	                      });
+	
+				                interReaction.unmount({ compGroup: compIdSuffix });
+			
+				                interReaction.unmount(
+				                  compListDetailsArg
+				                );
+				              });
+				            } else {
+				            	sectionMethodLmnts[sectionMethodLmntKey].querySelector(interReactionMethodTriggerSelector).addEventListener('click', function() {
+				            		let interReactionDetailsArg = {
+	                        compName: lmntForEachIndicesToCompNames[0],
+	                        compId: `${lmntForEachIndicesToCompIdSubstrings[0]}_${compIdSuffix}`
+	                      };
+	
+	                      let compListDetailsArg = { compList: [] };
+	                      let compGroupDetailsArg = { compGroup: compIdSuffix };
+	
+	                      if (sectionMethodLmntKey === 'sectionMethodReplace') {
+	                        interReactionDetailsArg.compReplacement = lmntForEachIndicesToCompNames[
+		                        Math.floor(
+	                            (Math.random() * lmntForEachIndicesToCompNamesLength)
+	                          )
+	                        ];
+	
+	                        if (prevReplacementCompNames.single !== undefined) {
+	                        	interReactionDetailsArg.compName = prevReplacementCompNames.single;
+	                        }
+	
+	                        prevReplacementCompNames.single = interReactionDetailsArg.compReplacement;
+	
+	                        compGroupDetailsArg.compReplacement = lmntForEachIndicesToCompNames[
+		                        Math.floor(
+	                            (Math.random() * lmntForEachIndicesToCompNamesLength)
+	                          )
+	                        ];
+	                      }
+	
+	                      if (sectionMethodLmntKey === 'sectionMethodUpdate') {
+	                        interReactionDetailsArg.compProps = { msg: `UPDATED: ${Date.now()}` };
+	                        compGroupDetailsArg.compProps = { msg: `UPDATED: ${Date.now()}` };
+	                      }
+	
+	                      let ct = 0;
+	                      while (ct < 2) {
+	                    	  let compListDetailsMember = {
+		                          compName: lmntForEachIndicesToCompNames[(ct + 3)],
+		                          compId: `${lmntForEachIndicesToCompIdSubstrings[(ct + 3)]}_${compIdSuffix}`
+		                        };
+	
+	                    	  if (sectionMethodLmntKey === 'sectionMethodReplace') {
+	                    		  let compReplacement = lmntForEachIndicesToCompNames[
+			                          Math.floor(
+		                              (Math.random() * lmntForEachIndicesToCompNamesLength)
+		                            )
+		                          ];
+	
+	                    		  if (prevReplacementCompNames.compList[ct] !== undefined) {
+	                    			  compListDetailsMember.compName = prevReplacementCompNames.compList[ct];
+	                    		  }
+	
+	                    		  compListDetailsMember.compReplacement = compReplacement;
+	                          prevReplacementCompNames.compList[ct] = compReplacement;
+	                    	  }
+	
+	                        if (sectionMethodLmntKey === 'sectionMethodUpdate') {
+	                        	compListDetailsMember.compProps = { msg: `UPDATED: ${Date.now()}` };
+	                        }
+	
+	                    	  compListDetailsArg.compList.push(compListDetailsMember);
+	                        ct++;
+	                      }
+	
+	                      interReactionMethod(interReactionDetailsArg);
+	                      interReactionMethod(compGroupDetailsArg);
+	                      interReactionMethod(compListDetailsArg);
+	                    });
+				            }
+			            }
+            		}
+	            }
+
+            	if (sectionMethodLmntKey === 'sectionMethodsCreateAndAssign') {
+                let isCreateThenAssignTriggered = false;
+                sectionMethodsCreateAndAssign.querySelector('button#trigger_create_and_assign').addEventListener('click', function() {
+                  if (isCreateThenAssignTriggered) {
+                    return false;
+                  }
+
+                  let compIdSuffix = 'test_create_then_assign';
+
+                  sectionMethodsCreateAndAssign.querySelector('.test_subjects > .single > div').appendChild(
+                    interReaction.createElement({
+                      compName: lmntForEachIndicesToCompNames[0],
+                      compId: `${lmntForEachIndicesToCompIdSubstrings[0]}_${compIdSuffix}`
+                    })
+                  );
+
+                  interReaction.assign({
+                    compName: lmntForEachIndicesToCompNames[0],
+                    compId: `${lmntForEachIndicesToCompIdSubstrings[0]}_${compIdSuffix}`,
+                    compProps: {
+                      msg: 'I am a very handsome peng\'n!'
+                    }          
+                  });
+
+                  let compListDetailsArg = { compList: [] };
+
+                  let ct = 0;
+                  while (ct < 2) {
+                    sectionMethodsCreateAndAssign.querySelector('.test_subjects > .list > div').appendChild(
+                      interReaction.createElement({
+                         compName: lmntForEachIndicesToCompNames[(ct + 1)],
+                         compId: `${lmntForEachIndicesToCompIdSubstrings[(ct + 1)]}_${compIdSuffix}`
+                       })
+                     );
+
+                    compListDetailsArg.compList.push({
+                      compName: lmntForEachIndicesToCompNames[(ct + 1)],
+                      compId: `${lmntForEachIndicesToCompIdSubstrings[(ct + 1)]}_${compIdSuffix}`,
+                      compProps: {
+                        msg: `Listed peng'n`
+                      }
+                    });
+
+                    ct++;
+                  }
+
+                  interReaction.assign(compListDetailsArg);
+                  isCreateThenAssignTriggered = true;
+                });
+            	}
+
+            	if (sectionMethodLmntKey === 'sectionMethodCreateAssignToDomElement') {
+                let isCreateAssignToDomElementTriggered = false;
+                sectionMethodCreateAssignToDomElement.querySelector('button#trigger_createAssignToDomElement').addEventListener('click', function() {
+                  if (isCreateAssignToDomElementTriggered) {
+                    return false;
+                  }
+
+                  let compIdSuffix = 'test_createAssignToDomElement';
+
+                  interReaction.createAssignToDomElement(
+                    {
+                      compName: lmntForEachIndicesToCompNames[0],
+                      compId: `${lmntForEachIndicesToCompIdSubstrings[0]}_${compIdSuffix}`,
+                      compProps: {
+                        msg: 'I am a very handsome peng\'n!'
+                      }
+                    },
+                    document.querySelector(
+                    	'section#method_createAssignToDomElement .test_subjects > .single > div'
+                    ),
+                    'append'
+                  );
+
+                  let compListDetailsArg = { compList: [] };
+
+                  let ct = 0;
+                  while (ct < 2) {
+                    compListDetailsArg.compList.push({
+                      compName: lmntForEachIndicesToCompNames[(ct + 1)],
+                      compId: `${lmntForEachIndicesToCompIdSubstrings[(ct + 1)]}_${compIdSuffix}`,
+                      compProps: {
+                        msg: `Listed peng'n`
+                      }
+                    });
+
+                    ct++;
+                  }
+
+                  interReaction.createAssignToDomElement(
+                    compListDetailsArg,
+                    document.querySelector(
+                    	'section#method_createAssignToDomElement .test_subjects > .list > div'
+                    ),
+                    'append'
+                  );
+
+                  isCreateAssignToDomElementTriggered = true;
+                });
+              }
+
+            	if (sectionMethodLmntKey === 'sectionMethodCreateAssignToDomSelector') {
+                let isCreateAssignToDomSelectorTriggered = false;
+                sectionMethodCreateAssignToDomSelector.querySelector('button#trigger_createAssignToDomSelector').addEventListener('click', function() {
+                  if (isCreateAssignToDomSelectorTriggered) {
+                    return false;
+                  }
+
+                  let compIdSuffix = 'test_createAssignToDomSelector';
+
+                  interReaction.createAssignToDomSelector(
+                    {
+                      compName: lmntForEachIndicesToCompNames[0],
+                      compId: `${lmntForEachIndicesToCompIdSubstrings[0]}_${compIdSuffix}`,
+                      compProps: {
+                        msg: 'I am a very handsome peng\'n!'
+                      }
+                    },
+                    'section#method_createAssignToDomSelector .test_subjects > .single > div',
+                    'append'
+                  );
+
+                  let compListDetailsArg = { compList: [] };
+
+                  let ct = 0;
+                  while (ct < 2) {
+                    compListDetailsArg.compList.push({
+                      compName: lmntForEachIndicesToCompNames[(ct + 1)],
+                      compId: `${lmntForEachIndicesToCompIdSubstrings[(ct + 1)]}_${compIdSuffix}`,
+                      compProps: {
+                        msg: `Listed peng'n`
+                      }
+                    });
+
+                    ct++;
+                  }
+
+                  interReaction.createAssignToDomSelector(
+                    compListDetailsArg,
+                    'section#method_createAssignToDomSelector .test_subjects > .list > div',
+                    'append'
+                  );
+
+                  isCreateAssignToDomSelectorTriggered = true;
+                });
+              }
+            });
+          }
+        );
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,75 @@
+{
+  "name": "interreaction",
+  "version": "1.0.0",
+  "description": "interReaction is a library which enables you to easily use React components in a non-React client application, while keeping React library and project build concerns separate from your non-React client application",
+  "engines-comments": {
+    "node": "using nvm to install and manage node versions (most recent stable) (https://github.com/nvm-sh/nvm): $ nvm  install --lts",
+    "npm": "using nvm to install and manage npm versions (most recent stable) (https://github.com/nvm-sh/nvm): $ nvm install-latest-npm"
+  },
+  "engines": {
+    "node": "^14.17.1",
+    "npm": "^6.14.13",
+    "pnpm": "^6.9.1"
+  },
+  "dependencies-comments": {
+    "scheduler": "Required for react-dom"
+  },
+  "dependencies": {
+    "@webcomponents/custom-elements": "^1.4.3",
+    "@webcomponents/webcomponents-platform": "^1.0.1"
+  },
+  "peerDependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "scheduler": "^0.20.2"
+  },
+  "devDependencies-comments": {
+    "eslint-plugin-react-compat": "Ensures React code is compatible with Preact"
+  },
+  "devDependencies": {
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.1",
+    "eslint-plugin-react": "^7.23.2",
+    "eslint-plugin-react-compat": "^0.1.7",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "react": "^17.0.2",
+    "react-devtools-core": "^4.13.0",
+    "react-dom": "^17.0.2",
+    "scheduler": "^0.20.2"
+  },
+  "scripts": {
+    "build:dev": "pnpm run clean:build:dev && cross-env NODE_ENV=development WORKSPACE=interreaction ENVIRON=dev webpack --progress --color --config ./config/webpack/webpack-dev.config.js",
+    "build:prod": "pnpm run clean:build:prod && cross-env NODE_ENV=production WORKSPACE=interreaction ENVIRON=prod webpack --progress --color --config ./config/webpack/webpack-prod.config.js",
+    "build:prod-dev": "pnpm run clean:build:prod-dev && cross-env NODE_ENV=development WORKSPACE=interreaction ENVIRON=prod-dev webpack --progress --color --config ./config/webpack/webpack-prod-dev.config.js",
+    "build:release": "pnpm run clean:build && pnpm run build:dev && pnpm run build:prod && node ./task/makeReleaseDist.js",
+    "clean": "pnpm run clean:build && pnpm run clean:dependencies",
+    "clean:all": "pnpm run clean:build && pnpm run clean:dependencies",
+    "clean:build": "rimraf build",
+    "clean:build:cache": "rimraf build/cache",
+    "clean:build:dev": "rimraf build/dist/dev",
+    "clean:build:prod": "rimraf build/cache && rimraf build/dist/prod",
+    "clean:build:prod-dev": "rimraf build/cache && rimraf build/dist/prod-dev",
+    "clean:dependencies": "rimraf npm-debug.log && rimraf .pnpm-debug.log && rimraf pnpm-debug.log && rimraf node_modules",
+    "clean:dependency-locks": "rimraf package-lock.json && rimraf pnpm-lock.yaml",
+    "lint": "cross-env WORKSPACE=interreaction eslint --config ../../config/test/eslint.config.js --output-file ../../test/output/report/interreaction/eslint/eslint-report.html --format html --color ../../src",
+    "lint:debug": "cross-env WORKSPACE=interreaction eslint --config ../../config/test/eslint.config.js --output-file ../../test/output/report/interreaction/eslint/eslint-report.html --format html --color --debug ../../src"
+  },
+  "author": {
+    "name": "Antonio Malcolm",
+    "email": "antonio@antoniomalcolm.com",
+    "url": "https://antoniomalcolm.com"
+  },
+  "homepage": "https://github.com/antonio-malcolm/interreaction",
+  "license": "BSD-3-Clause",
+  "repository": {
+    "url": "git+https://github.com/antonio-malcolm/interreaction.git",
+    "type": "git",
+    "directory": "workspaces/interreaction"
+  },
+  "files": [
+    "build/dist/release",
+    "src",
+    "AUTHORS",
+    "LICENSE"
+  ],
+  "main": "build/dist/release/interreaction.js"
+}
