@@ -352,7 +352,7 @@ A new interReaction Custom Element instance, to be appended to the DOM.
 __Example:__
 ```Javascript
 // APPENDING A NEW interReaction Custom Element TO DOM document:
-document.appednChild(
+document.appendChild(
   interReaction.createElement({
     // REQUIRED:
     compName: 'SomeCompName',
