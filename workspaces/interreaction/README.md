@@ -1159,19 +1159,19 @@ There are workspace entries for both interReaction (React) and interPreaction (P
 Below is a general overview of the project structure, i.e., "where to find the relevant things".
 
 interReaction (React) source code:  
-[workspaces/interreaction/src/interreaction/](workspaces/interreaction/src/interreaction/)
+[workspaces/interreaction/src/interreaction/](/workspaces/interreaction/src/interreaction/)
 
 interReaction (React) build output (after build, you will find child directories dist/[dev, prod, release]):  
-[workspaces/interreaction/build/](workspaces/interreaction/build/)
-
-interReaction (React) test modules:
-[test/spec/interreaction/]([test/spec/interreaction/])
+[workspaces/interreaction/build/](/workspaces/interreaction/build/)
 
 interPreaction (Preact) source code:  
-[workspaces/interpreaction/src/interreaction/](workspaces/interpreaction/src/interreaction/)
+[workspaces/interpreaction/src/interreaction/](/workspaces/interpreaction/src/interreaction/)
 
 interPreaction (Preact) build output (after build, you will find child directories dist/[dev, prod, release]):  
-[workspaces/interpreaction/build/](workspaces/interpreaction/build/)
+[workspaces/interpreaction/build/](/workspaces/interpreaction/build/)
+
+interReaction test modules:
+[test/spec/interreaction/]([/test/spec/interreaction/])
 
 Test output (genrated after running tests)
 `test/output/`
@@ -1193,5 +1193,5 @@ This software is built with the greatest care and attention to detail, and thoro
 Any support is greatly appreciated!
 
 [!["Donate: Buy Me A Coffee"](https://img.shields.io/badge/Donate-Buy%20Me%20A%20Coffee-a1644c?style=for-the-badge&logo=buymeacoffee)](https://buymeacoffee.com/antoniomalcolm)
- [!["Donate: LiberaPay"](https://img.shields.io/badge/Donate-LiberaPay-f6c915?style=for-the-badge&logo=liberapay)](https://www.buymeacoffee.com/antoniomalcolm)
+ [!["Donate: LiberaPay"](https://img.shields.io/badge/Donate-LiberaPay-f6c915?style=for-the-badge&logo=liberapay)](https://liberapay.com/antonio-malcolm)
  [!["Donate: PayPal"](https://img.shields.io/badge/Donate-PayPal-0070ba?style=for-the-badge&logo=paypal)](https://paypal.me/antoniomalcolm)
