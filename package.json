@@ -1,6 +1,6 @@
 {
   "name": "interreaction",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "interReaction is a library which enables you to easily use React components in a non-React client application, while keeping React library and project build concerns separate from your non-React client application",
   "engines-comments": {
     "node": "using nvm to install and manage node versions (most recent stable) (https://github.com/nvm-sh/nvm): $ nvm  install --lts",
