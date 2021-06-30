@@ -120,6 +120,68 @@ if (
 
 const plugins = [];
 
+const cssLoaders = [
+    MiniCssExtractPlugin.loader,
+    {
+      loader: 'css-loader',
+      options: {
+        // We need both the postcss-loader and the sass-loader
+        importLoaders: 2,
+        modules: { auto: true },
+        sourceMap: (
+            CurrentVarValues.ENVIRON === Environs.DEV
+            || CurrentVarValues.ENVIRON === Environs.PROD_DEV
+          ),
+        url: true
+      }
+    },
+    {
+      loader: 'postcss-loader',
+      options: {
+        postcssOptions: {
+          hideNothingWarning: true,
+          plugins: () => [
+            postcssPresetEnv({
+              autoprefixer: {
+                cascade: false,
+                overrideBrowserslist: supportedBrowsers
+              },
+              stage: 0
+            })
+          ]
+        },
+        sourceMap: (
+            CurrentVarValues.ENVIRON === Environs.DEV
+            || CurrentVarValues.ENVIRON === Environs.PROD_DEV
+          )
+      }
+    },
+    {
+      loader: 'sass-loader',
+      options: {
+        // Require dart sass implementation,
+        // to support the current features...
+        implementation: require('sass'),
+        sassOptions: {
+          fiber: require('fibers')
+        },
+        sourceMap: (
+            CurrentVarValues.ENVIRON === Environs.DEV
+            || CurrentVarValues.ENVIRON === Environs.PROD_DEV
+          )
+      }
+    }
+  ];
+
+if (CurrentVarValues.ENVRION == Environs.DEV || CurrentVarValues.ENVRION == Environs.PROD_DEV) {
+  cssLoaders.push({
+    loader: 'resolve-url-loader',
+    options: {
+      sourceMap: true
+    }
+  });
+}
+
 if (CurrentVarValues.WORKSPACE !== Workspaces.INTERPREACTION) {
   if (CurrentVarValues.WORKSPACE !== Workspaces.INTERREACTION) {
     let minCssExtractPluginFileName = 
@@ -127,7 +189,7 @@ if (CurrentVarValues.WORKSPACE !== Workspaces.INTERPREACTION) {
     
     if (CurrentVarValues.ENVIRON === Environs.PROD || CurrentVarValues.ENVIRON === Environs.PROD_DEV) {
       minCssExtractPluginFileName = `${minCssExtractPluginFileName}.[contenthash]`;
-    
+
       plugins.push(
         new Webpack.optimize.MinChunkSizePlugin({
           minChunkSize: 500_000
@@ -175,67 +237,7 @@ module.exports = {
     },
     cssRule: {
       test: FileTypes.REGEX_EXT_CSS,
-      use: [
-        MiniCssExtractPlugin.loader,
-        {
-          loader: 'css-loader',
-          options: {
-            // We need both the postcss-loader and the sass-loader
-            importLoaders: 2,
-            modules: { auto: true },
-            sourceMap: (
-                CurrentVarValues.ENVIRON === Environs.DEV
-                || CurrentVarValues.ENVIRON === Environs.PROD_DEV
-              ),
-            url: true
-          }
-        },
-        {
-          loader: 'postcss-loader',
-          options: {
-            postcssOptions: {
-              hideNothingWarning: true,
-              plugins: () => [
-                postcssPresetEnv({
-                  autoprefixer: {
-                    cascade: false,
-                    overrideBrowserslist: supportedBrowsers
-                  },
-                  stage: 0
-                })
-              ]
-            },
-            sourceMap: (
-                CurrentVarValues.ENVIRON === Environs.DEV
-                || CurrentVarValues.ENVIRON === Environs.PROD_DEV
-              )
-          }
-        },
-        {
-          loader: 'resolve-url-loader',
-          options: {
-            sourceMap: (
-                CurrentVarValues.ENVIRON === Environs.DEV
-                || CurrentVarValues.ENVIRON === Environs.PROD_DEV
-              )
-          }
-        },
-        {
-          loader: 'sass-loader',
-          options: {
-            // Require dart sass implementation,
-            // to support the current features...
-            implementation: require('sass'),
-            sassOptions: {
-              fiber: require('fibers')
-            },
-            sourceMap: (
-                CurrentVarValues.ENVIRON === Environs.DEV
-                || CurrentVarValues.ENVIRON === Environs.PROD_DEV
-              )
-          }
-        }
-      ]
+      use: cssLoaders
     },
     audioRule: {
       test: FileTypes.REGEX_EXT_AUDIO,
